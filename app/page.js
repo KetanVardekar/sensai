@@ -1,13 +1,13 @@
 import { Button } from "@/components/ui/button";
+import HeroSection from "@/components/ui/hero";
 import Image from "next/image";
 
 export default function Home() {
   return (
-    <div>Hello Ketan Here
+    <div>
+      <div className="grid-background"></div>
 
-<br/>
-
-<Button>HELLO</Button>
+      <HeroSection/>
 
     </div>
   );
