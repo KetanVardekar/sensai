@@ -1,10 +1,31 @@
-
-import React from 'react'
+"use client"
+import React, { useEffect, useRef } from 'react'
 import { Button } from './button'
 import Link from 'next/link'
 import Image from 'next/image'
 
 const HeroSection = () => {
+
+    const imageRef = useRef(null);
+    useEffect(() => {
+
+        const imageElement = imageRef.current;
+        const handleScroll = () => {
+            const scrollPosition = window.scrollY;
+            const scrollThreshold = 100;
+
+            if (scrollPosition > scrollThreshold) {
+                imageElement.classList.add('scrolled')
+            } else {
+                imageElement.classList.remove('scrolled')
+            }
+        }
+
+        window.addEventListener('scroll', handleScroll);
+
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, [imageRef])
+
     return <section className='w-full pt-36 md:pt-48 pb-10'>
         <div className='space-y-6 text-center'>
             <div className='space-y-6 mx-auto'>
@@ -33,8 +54,8 @@ const HeroSection = () => {
                 </Link>
             </div>
 
-            <div>
-                <div>
+            <div className='hero-image-wrapper mt-5 md:mt-0'>
+                <div ref={imageRef} className='hero-image'>
                     <Image src={"/banner.jpeg"} alt='Banner Sensai' className='rounded-lg shadow-2xl border mx-auto' width={1280} height={720} priority />
                 </div>
             </div>
